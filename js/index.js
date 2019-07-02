@@ -1,6 +1,10 @@
 // Load saved data
-var x = JSON.stringify(localStorage.getItem("x_values"));
-var y = JSON.stringify(localStorage.getItem("y_values"));
+//var x = JSON.parse(localStorage.getItem("x_val"));
+//var y = JSON.parse(localStorage.getItem("y_val"));
+var x = [1,2];
+var y = [1,2]
+
+
 
 // bool used to track plot's existence
 var graph_exists = false; // needed to know when to purge before recreation
@@ -20,9 +24,8 @@ var update = function(){
 	complete_analysis();
 
 	// save data
-	localStorage.setItem("x_values",JSON.stringify(x));
-	localStorage.setItem("y_values",JSON.stringify(y));
-
+	//localStorage.setItem("x_val",JSON.stringify(x));
+	//localStorage.setItem("y_val",JSON.stringify(y));
 }
 
 
@@ -67,6 +70,7 @@ var complete_analysis = function(){
 	// linreg analysis
 	var results = linReg(y,x);
 	$("#equation").html('y = ' + results.slope + 'x +' + results.intercept);
+	
 };
 
 complete_analysis();
