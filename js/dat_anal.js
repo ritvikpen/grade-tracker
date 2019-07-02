@@ -15,7 +15,6 @@ function linReg(y,x){
         var sum_yy = 0;
 
         for (var i = 0; i < y.length; i++) {
-
             sum_x += x[i];
             sum_y += y[i];
             sum_xy += (x[i]*y[i]);
@@ -36,4 +35,4 @@ Plotly.plot( TESTER, [{x , y}], {margin: { t: 0} } );
 
 // linreg analysis
 var results = linReg(y,x);
-document.write('y = ' + results.slope + 'x +' + results.intercept);
+$("#equation").html('y = ' + results.slope + 'x +' + results.intercept);
