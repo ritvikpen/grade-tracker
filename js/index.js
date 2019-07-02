@@ -1,13 +1,30 @@
 // Load saved data
 var x = JSON.stringify(localStorage.getItem("x_values"));
-//var y = JSON.stringify(localStorage.getItem("y_values"));
-var y =[2,4,6,8,10]
+var y = JSON.stringify(localStorage.getItem("y_values"));
+
+// bool used to track plot's existence
+var graph_exists = false; // needed to know when to purge before recreation
 
 // User input
-$("#x_input").click(function(){
-	x = [1,2,3,4,5]
+var update = function(){
+
+	// new x and y values collected
+	var new_x_dat = $("#x_input").val();
+	var new_y_dat = $("#y_input").val();
+
+	// new values appended
+	x.push(new_x_dat);
+	y.push(new_y_dat);
+
+	// update plot + linReg
 	complete_analysis();
-});
+
+	// save data
+	localStorage.setItem("x_values",JSON.stringify(x));
+	localStorage.setItem("y_values",JSON.stringify(y));
+
+}
+
 
 // basic linReg
 // taken from: https://stackoverflow.com/questions/6195335/linear-regression-in-javascript
@@ -34,9 +51,6 @@ function linReg(y,x){
 
         return lr;
 }
-
-// bool used to track plot's existence
-var graph_exists = false; // needed to know when to purge before recreation
 
 var complete_analysis = function(){
 

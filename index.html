@@ -15,9 +15,14 @@
   
   <body>
     <section class="container">
+
     	<div class="base_graph center" id="tester"></div>
 		<h1 id="equation" class="center"></h1>
-		<button id="x_input">X DATA</button>
+
+		<input type="text" id="x_input" value="X DATA"/>
+		<input type="text" id="y_input" value="Y DATA"/>
+		<button id="submit_button" onclick="update()">UPDATE</button>
+
     </section>
     <script src="js/index.js"></script>
   </body>
