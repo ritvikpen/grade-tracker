@@ -1,13 +1,15 @@
 // Load saved data
-//var x = JSON.parse(localStorage.getItem("x_val"));
-//var y = JSON.parse(localStorage.getItem("y_val"));
-var x = [1,2];
-var y = [1,2]
-
-
+var x = JSON.parse(localStorage.getItem("x_val"));
+var y = JSON.parse(localStorage.getItem("y_val"));
 
 // bool used to track plot's existence
-var graph_exists = false; // needed to know when to purge before recreation
+var graph_exists = false;
+
+// bool to trck data status
+var dat_exist = true;
+if(x==null || y==null){
+	dat_exist = false;
+}
 
 // User input
 var update = function(){
@@ -17,15 +19,21 @@ var update = function(){
 	var new_y_dat = $("#y_input").val();
 
 	// new values appended
-	x.push(new_x_dat);
-	y.push(new_y_dat);
+	if(dat_exist){
+		x.push(new_x_dat);
+		y.push(new_y_dat);
+	} else {
+		x = [new_x_dat];
+		y = [new_y_dat];
+		dat_exist = true;
+	}
 
 	// update plot + linReg
 	complete_analysis();
 
 	// save data
-	//localStorage.setItem("x_val",JSON.stringify(x));
-	//localStorage.setItem("y_val",JSON.stringify(y));
+	localStorage.setItem("x_val",JSON.stringify(x));
+	localStorage.setItem("y_val",JSON.stringify(y));
 }
 
 
@@ -39,7 +47,7 @@ function linReg(y,x){
         var sum_xy = 0;
         var sum_xx = 0;
         var sum_yy = 0;
-
+		
         for (var i = 0; i < y.length; i++) {
             sum_x += x[i];
             sum_y += y[i];
@@ -73,4 +81,6 @@ var complete_analysis = function(){
 	
 };
 
-complete_analysis();
+if(dat_exist){
+	complete_analysis();
+}
